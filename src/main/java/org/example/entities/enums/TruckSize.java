@@ -2,9 +2,9 @@ package org.example.entities.enums;
 
 public enum TruckSize {
 
-    SMALL(1000),
-    MID(4000),
-    LARGE(10000);
+    PEQUENO(1000),
+    MEDIO(4000),
+    GRANDE  (10000);
 
     private final int payloadCapacity;
 

@@ -8,7 +8,7 @@ public class Freight {
     public String requestingCompany;
     public List<Object> products;
     public List<Object> trucks;
-    public List<Object> Destyni;
+    public List<Object> Destiny;
 
 
 }

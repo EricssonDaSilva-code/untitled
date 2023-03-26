@@ -2,10 +2,14 @@ package org.example.application;
 
 import org.example.entities.Vehicle;
 import org.example.entities.enums.TruckSize;
+import org.example.model.Citys;
 import org.example.model.Db;
+import org.example.model.Product;
 import org.example.services.FreightCalculator;
 import org.example.view.Menus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.example.view.Menus.actionMenu;
@@ -14,10 +18,10 @@ public class Program {
     public static void Start() {
         int option;
         Scanner sc =  new Scanner(System.in);
+        //Recebe uma matriz com os nomes e distancias entre cidades
         String[][] data = Db.cityDistance();
-        String[][] mat = new String[6][4];
-        int marcador  = 0;
-
+        List<Citys> citysList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
 
         do {
             String actionMenu = actionMenu();
@@ -27,21 +31,11 @@ public class Program {
             switch (option) {
                 case 1:
                     //Imprime um menu com as cidades para o usuario escolher
-                    data = Db.cityDistance();
-                    mat = new String[6][4];
-                    marcador = 0;
+                    String arrayNames = Menus.arrayNames();
 
                     System.out.println("ESCOLHA A CIDADE DE ORIGEM: ");
-
                     System.out.println();
-                    for (int i = 0; i < 6; i++) {
-                        for (int j = 0; j < 4; j++) {
-                            mat[i][j] = data[0][marcador];
-                            System.out.printf(marcador + " - " + "%-20s", mat[i][j]);
-                            marcador++;
-                        }
-                        System.out.println();
-                    }
+                    //Guarda na variavel numberCity o número da coluna na linha 0 onde esta localizada o nome da cidade
                     System.out.print("-> ");
                     int numberCity = sc.nextInt();
 
@@ -49,28 +43,34 @@ public class Program {
                     System.out.println();
 
                     System.out.println("ESCOLHA A CIDADE DE DESTINO: ");
+
+                    //Guarda na variavel numberCityDestiny o númeroi da coluna na linha 0 onde está localizado o nome da cidade de destino
                     System.out.print("-> ");
                     int numberCityDestiny = sc.nextInt();
 
                     System.out.println();
                     System.out.printf("\nA cidade de destino é %s\n", data[0][numberCityDestiny]);
-
+                    //Exibe um submenu onde haveria a escolha do tipo de transporte, só coloquei o rodoviario portando ele
+                    //apenas aparece na tela sem nenhuma interação
                     System.out.println();
                     String modeTransport = Menus.modeOfTransportMenu();
                     System.out.println();
 
+                    //Exibe um menu para o usuario escolher qual dos 3 tipos de caminhões ele quer usar para calcular
+                    //o frete
                     String vehicleChoiceMenu = Menus.vehicleChoice();
 
                     System.out.print("-> ");
                     int option2 = sc.nextInt();
 
+
                     Vehicle truck = new Vehicle();
                     if (option2 == 1) {
-                        truck = new Vehicle(TruckSize.SMALL);
+                        truck = new Vehicle(TruckSize.PEQUENO);
                     } else if (option2 == 2) {
-                        truck = new Vehicle(TruckSize.MID);
+                        truck = new Vehicle(TruckSize.MEDIO);
                     } else if (option2 == 3) {
-                        truck = new Vehicle(TruckSize.LARGE);
+                        truck = new Vehicle(TruckSize.GRANDE);
 
                     } else {
                         System.out.println("Escolha um opção válida");
@@ -85,7 +85,6 @@ public class Program {
                     break;
                 case 2:
                     data = Db.cityDistance();
-                    mat = new String[6][4];
                     System.out.println("********************************************************");
                     System.out.println("*                  CADASTRO DE FRETE                   *");
                     System.out.println("********************************************************");
@@ -93,22 +92,17 @@ public class Program {
                     System.out.println("Digite o nome da empresa contratante: ");
                     String requestingCompany = sc.nextLine();
 
-                    System.out.println("ESCOLHA A CIDADE DE ORIGEM: ");
+                    //Imprime um menu com as cidades para o usuario escolher
+                    arrayNames = Menus.arrayNames();
 
-                    System.out.println();
-                    for (int i = 0; i < 6; i++) {
-                        for (int j = 0; j < 4; j++) {
-                            mat[i][j] = data[0][marcador];
-                            System.out.printf(marcador + " - " + "%-20s", mat[i][j]);
-                            marcador++;
-                        }
-                        System.out.println();
-                    }
+                    System.out.println("ESCOLHA A CIDADE DE ORIGEM: ");
 
                     System.out.print("-> ");
                     numberCity = sc.nextInt();
+
                     System.out.printf("A cidade de origem é %s", data[0][numberCity]);
                     System.out.println();
+
                     char choice;
                     do {
                         System.out.println("ESCOLHA A CIDADE DE DESTINO: ");
@@ -119,6 +113,15 @@ public class Program {
 
                         System.out.println();
                         System.out.printf("\nA cidade de destino é %s\n", data[0][numberCityDestiny]);
+                        distance = data[numberCityDestiny + 1][numberCity];
+                        Citys city = new Citys(data[0][numberCity], numberCityDestiny, distance);
+                        citysList.add(city);
+                        numberCity = numberCityDestiny;
+                        System.out.println();
+                        System.out.println("********************************************************");
+                        System.out.println("*      ENTRE COM OS PRODUTOS A SEREM TRANSPORTADOS     *");
+                        System.out.println("********************************************************");
+                        System.out.println();
                     } while (choice != 'N');
 
 

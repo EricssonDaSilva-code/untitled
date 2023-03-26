@@ -1,5 +1,7 @@
 package org.example.view;
 
+import org.example.model.Db;
+
 public class Menus {
     public static String actionMenu () {
         System.out.println("********************************************************");
@@ -18,6 +20,22 @@ public class Menus {
         return null;
     }
 
+    public static String arrayNames() {
+        //Recebe uma matriz com os nomes e distancias entre cidades
+        String[][] data = Db.cityDistance();
+        //Gera uma matriz de 6 x 4 para exibir a escolha das cidades
+        String[][] mat = new String[6][4];
+        int marcador  = 0;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 4; j++) {
+                mat[i][j] = data[0][marcador];
+                System.out.printf(marcador + " - " + "%-20s", mat[i][j]);
+                marcador++;
+            }
+            System.out.println();
+        }
+        return null;
+    }
     public static String modeOfTransportMenu() {
         System.out.println("********************************************************");
         System.out.println("*             ESCOLHA O TIPO DE TRANSPORTE             *");

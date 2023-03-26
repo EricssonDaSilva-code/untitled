@@ -4,7 +4,7 @@ import org.example.services.FreightCalculator;
 
 public class Test {
     public static void main(String[] args) {
-        Vehicle truck = new Vehicle(TruckSize.SMALL);
+        Vehicle truck = new Vehicle(TruckSize.PEQUENO);
         double cost = FreightCalculator.calculateStretch("2735", truck);
         System.out.println(cost);
     }
