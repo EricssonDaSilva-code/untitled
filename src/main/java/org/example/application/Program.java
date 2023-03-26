@@ -14,30 +14,31 @@ public class Program {
     public static void Start() {
         int option;
         Scanner sc =  new Scanner(System.in);
-        String actionMenu = actionMenu();
-        String modeTransport = Menus.modeOfTransportMenu();
+        String[][] data = Db.cityDistance();
+        String[][] mat = new String[6][4];
+        int marcador  = 0;
 
 
         do {
-            actionMenu();
+            String actionMenu = actionMenu();
 
             option = sc.nextInt();
 
             switch (option) {
                 case 1:
                     //Imprime um menu com as cidades para o usuario escolher
-                    String[][] data = Db.cityDistance();
-                    String[][] mat = new String[6][4];
-                    int marcador  = 0;
+                    data = Db.cityDistance();
+                    mat = new String[6][4];
+                    marcador = 0;
 
                     System.out.println("ESCOLHA A CIDADE DE ORIGEM: ");
 
                     System.out.println();
-                    for (int i=0; i < 6; i++) {
+                    for (int i = 0; i < 6; i++) {
                         for (int j = 0; j < 4; j++) {
                             mat[i][j] = data[0][marcador];
                             System.out.printf(marcador + " - " + "%-20s", mat[i][j]);
-                            marcador ++;
+                            marcador++;
                         }
                         System.out.println();
                     }
@@ -55,7 +56,7 @@ public class Program {
                     System.out.printf("\nA cidade de destino é %s\n", data[0][numberCityDestiny]);
 
                     System.out.println();
-                    String modeTransport1 = modeTransport;
+                    String modeTransport = Menus.modeOfTransportMenu();
                     System.out.println();
 
                     String vehicleChoiceMenu = Menus.vehicleChoice();
@@ -66,28 +67,60 @@ public class Program {
                     Vehicle truck = new Vehicle();
                     if (option2 == 1) {
                         truck = new Vehicle(TruckSize.SMALL);
-                    }
-
-                    else if (option2 == 2){
+                    } else if (option2 == 2) {
                         truck = new Vehicle(TruckSize.MID);
-                    }
-
-                    else if (option2 == 3) {
+                    } else if (option2 == 3) {
                         truck = new Vehicle(TruckSize.LARGE);
 
-                    }
-
-                    else {
+                    } else {
                         System.out.println("Escolha um opção válida");
                     }
 
                     System.out.println();
-                    String distance = data[numberCityDestiny+1][numberCity];
+                    String distance = data[numberCityDestiny + 1][numberCity];
                     double cost = FreightCalculator.calculateStretch(distance, truck);
                     System.out.printf("A distancia entre a cidade de %s e %s é de %s KM, utilizando um caminhão %s " +
-                            " o custo será de R$%.2f reais.\n"
+                                    " o custo será de R$%.2f reais.\n"
                             , data[0][numberCity], data[0][numberCityDestiny], distance, truck.getSize().toString(), cost);
                     break;
+                case 2:
+                    data = Db.cityDistance();
+                    mat = new String[6][4];
+                    System.out.println("********************************************************");
+                    System.out.println("*                  CADASTRO DE FRETE                   *");
+                    System.out.println("********************************************************");
+                    System.out.println();
+                    System.out.println("Digite o nome da empresa contratante: ");
+                    String requestingCompany = sc.nextLine();
+
+                    System.out.println("ESCOLHA A CIDADE DE ORIGEM: ");
+
+                    System.out.println();
+                    for (int i = 0; i < 6; i++) {
+                        for (int j = 0; j < 4; j++) {
+                            mat[i][j] = data[0][marcador];
+                            System.out.printf(marcador + " - " + "%-20s", mat[i][j]);
+                            marcador++;
+                        }
+                        System.out.println();
+                    }
+
+                    System.out.print("-> ");
+                    numberCity = sc.nextInt();
+                    System.out.printf("A cidade de origem é %s", data[0][numberCity]);
+                    System.out.println();
+                    char choice;
+                    do {
+                        System.out.println("ESCOLHA A CIDADE DE DESTINO: ");
+                        System.out.print("-> ");
+                        numberCityDestiny = sc.nextInt();
+                        System.out.println("Continuar cadastrando mais destinos? [S/N]");
+                        choice = sc.nextLine().toUpperCase().charAt(0);
+
+                        System.out.println();
+                        System.out.printf("\nA cidade de destino é %s\n", data[0][numberCityDestiny]);
+                    } while (choice != 'N');
+
 
                 case 4:
                     System.out.println("Seu programa está sendo encerrado!");
