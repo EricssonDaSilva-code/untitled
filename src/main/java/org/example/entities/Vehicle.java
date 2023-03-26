@@ -2,10 +2,18 @@ package org.example.entities;
 
 import org.example.entities.enums.TruckSize;
 
-public abstract class Vehicle {
+public class Vehicle {
 
-    private TruckSize size;
-    private int payloadCapacity;
+    public TruckSize size;
+    public int payloadCapacity;
+
+    public Vehicle () {
+
+    }
+
+    public Vehicle(TruckSize size) {
+        this.size = size;
+    }
 
     public Vehicle(TruckSize size, int payloadCapacity) {
         this.size = size;
