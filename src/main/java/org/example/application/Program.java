@@ -4,6 +4,7 @@ import org.example.entities.Vehicle;
 import org.example.entities.enums.TruckSize;
 import org.example.model.Citys;
 import org.example.model.Db;
+import org.example.model.Freight;
 import org.example.model.Product;
 import org.example.services.FreightCalculator;
 import org.example.view.Menus;
@@ -89,7 +90,7 @@ public class Program {
                     System.out.println("*                  CADASTRO DE FRETE                   *");
                     System.out.println("********************************************************");
                     System.out.println();
-                    System.out.println("Digite o nome da empresa contratante: ");
+                    System.out.print("Digite o nome da empresa contratante: ");
                     String requestingCompany = sc.nextLine();
 
                     //Imprime um menu com as cidades para o usuario escolher
@@ -103,27 +104,54 @@ public class Program {
                     System.out.printf("A cidade de origem é %s", data[0][numberCity]);
                     System.out.println();
 
-                    char choice;
+                    String choice;
                     do {
+                        int cont = 0;
                         System.out.println("ESCOLHA A CIDADE DE DESTINO: ");
+
                         System.out.print("-> ");
                         numberCityDestiny = sc.nextInt();
-                        System.out.println("Continuar cadastrando mais destinos? [S/N]");
-                        choice = sc.nextLine().toUpperCase().charAt(0);
 
                         System.out.println();
                         System.out.printf("\nA cidade de destino é %s\n", data[0][numberCityDestiny]);
-                        distance = data[numberCityDestiny + 1][numberCity];
-                        Citys city = new Citys(data[0][numberCity], numberCityDestiny, distance);
-                        citysList.add(city);
-                        numberCity = numberCityDestiny;
-                        System.out.println();
+
                         System.out.println("********************************************************");
                         System.out.println("*      ENTRE COM OS PRODUTOS A SEREM TRANSPORTADOS     *");
                         System.out.println("********************************************************");
                         System.out.println();
-                    } while (choice != 'N');
+                        System.out.println();
+                        System.out.println("Quantos tipos de produtos deseja transportar? ");
+                        int quantity = sc.nextInt();
+                        for (int i=0; i < quantity; i++) {
+                            System.out.print("-> Tipo de produto: ");
+                            sc.nextLine();
+                            String name = sc.nextLine();
 
+                            System.out.print("-> Digite o peso do produto: ");
+                            double weight = sc.nextDouble();
+
+                            System.out.print("-> Digite a quantidade a ser transportada: ");
+                            int amount = sc.nextInt();
+                            System.out.println();
+                            Product product = new Product(name, weight, amount);
+                            productList.add(product);
+                        }
+
+                        System.out.print("Continuar cadastrando mais destinos? [S/N]");
+                        sc.nextLine();
+                        choice = sc.nextLine().toUpperCase();
+
+                        System.out.println();
+                        distance = data[numberCityDestiny + 1][numberCity];
+                        Integer distanceInt = Integer.valueOf(distance);
+                        Citys city = new Citys(data[0][numberCity], numberCityDestiny, distanceInt, productList);
+                        citysList.add(city);
+                        for (Citys p: citysList) {
+                            System.out.println(citysList.toString());
+                        }
+                        numberCity = numberCityDestiny;
+                    } while (!(choice == "N"));
+                    break;
 
                 case 4:
                     System.out.println("Seu programa está sendo encerrado!");

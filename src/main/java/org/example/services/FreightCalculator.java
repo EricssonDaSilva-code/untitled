@@ -6,18 +6,18 @@ import org.example.entities.enums.TruckSize;
 public class FreightCalculator {
 
     public static double calculateStretch(String distance, Vehicle vehicle) {
-        if (vehicle.getSize() == TruckSize.SMALL) {
+        if (vehicle.getSize() == TruckSize.PEQUENO) {
             double cost = Double.parseDouble(distance) * 4.87;
             return cost;
         }
 
-        else if (vehicle.getSize() == TruckSize.MID) {
+        else if (vehicle.getSize() == TruckSize.MEDIO) {
             double cost = Double.parseDouble(distance) * 11.92;
             return cost;
 
         }
 
-        else if (vehicle.getSize() == TruckSize.LARGE) {
+        else if (vehicle.getSize() == TruckSize.GRANDE) {
             double cost = Double.parseDouble(distance) * 27.44;
             return cost;
         }

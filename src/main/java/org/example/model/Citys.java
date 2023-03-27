@@ -1,18 +1,23 @@
 package org.example.model;
 
+import java.util.List;
+
 public class Citys {
     public String cityOfOrigin;
     public Integer destinationCity;
     public Integer distance;
 
-    public Citys(String cityOfOrigin, int numberCityDestiny, String distance) {
+    List<Product> productList;
+
+    public Citys() {
 
     }
 
-    public Citys(String cityOfOrigin, Integer destinationCity, Integer distance) {
+    public Citys(String cityOfOrigin, Integer destinationCity, Integer distance, List<Product> productList) {
         this.cityOfOrigin = cityOfOrigin;
         this.destinationCity = destinationCity;
         this.distance = distance;
+        this.productList = productList;
     }
 
     public String getCityOfOrigin() {
@@ -39,12 +44,21 @@ public class Citys {
         this.distance = distance;
     }
 
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
     @Override
     public String toString() {
         return "Citys{" +
                 "cityOfOrigin='" + cityOfOrigin + '\'' +
-                ", destinationCity='" + destinationCity + '\'' +
+                ", destinationCity=" + destinationCity +
                 ", distance=" + distance +
+                ", productList=" + productList +
                 '}';
     }
 }
