@@ -119,7 +119,7 @@ public class Program {
                         System.out.print("Peso do produto: ");
                         Double productWeight = sc.nextDouble();
                         System.out.println("Quantidade a ser transportada: ");
-                        Integer quantity = sc.nextInt();
+                        Double quantity = sc.nextDouble();
                         Product product = new Product(productName, productWeight);
                         System.out.println(product.toString());
                         charge.addProduct(product, quantity);

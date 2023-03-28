@@ -1,18 +1,19 @@
 package org.example.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Charge {
-    public List<Product> productList;
+    public List<Product> productList = new ArrayList<>();
     public Double totalWeight;
 
-    public Integer quantity;
+    public Double quantity;
 
     public Charge() {
 
     }
 
-    public Charge(List<Product> productList, Double totalWeight, Integer quantity) {
+    public Charge(List<Product> productList, Double totalWeight, Double quantity) {
         this.productList = productList;
         this.totalWeight = totalWeight;
         this.quantity = quantity;
@@ -34,21 +35,37 @@ public class Charge {
         this.totalWeight = totalWeight;
     }
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
-    public void addProduct(Product product, Integer quantity) {
+    public void addProduct(Product product, Double quantity) {
         productList.add(product);
-        totalWeight += product.getWeight() * quantity;
+        if (totalWeight == null) {
+            totalWeight = product.getWeight() * quantity;
+        }
+        else {
+
+            totalWeight += product.getWeight() * quantity;
+        }
     }
 
-    public void removeProduct(Product product, Integer quantity) {
+    public void removeProduct(Product product, Double quantity) {
+
         productList.remove(product);
         totalWeight -= product.getWeight() * quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Charge{" +
+                "productList=" + productList +
+                ", totalWeight=" + totalWeight +
+                ", quantity=" + quantity +
+                '}';
     }
 }

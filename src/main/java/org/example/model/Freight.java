@@ -2,14 +2,15 @@ package org.example.model;
 
 import org.example.entities.Vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Freight {
     private String contractCompany;
     private City origin;
     private City destiny;
-    private List<Charge> chargeList;
-    private List<Vehicle> vehicles;
+    private List<Charge> chargeList = new ArrayList<>();
+    private List<Vehicle> vehicles = new ArrayList<>();
 
     public Freight() {
 
@@ -68,5 +69,16 @@ public class Freight {
     }
     public void addCharge(Charge charge) {
         chargeList.add(charge);
+    }
+
+    @Override
+    public String toString() {
+        return "Freight{" +
+                "contractCompany='" + contractCompany + '\'' +
+                ", origin=" + origin +
+                ", destiny=" + destiny +
+                ", chargeList=" + chargeList +
+                ", vehicles=" + vehicles +
+                '}';
     }
 }

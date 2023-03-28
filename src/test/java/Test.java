@@ -1,9 +1,6 @@
 import org.example.entities.Vehicle;
 import org.example.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Test {
     public static void main(String[] args) {
         String[][] data = Db.cityDistance();
@@ -11,7 +8,6 @@ public class Test {
         Charge charge = new Charge();
         City city = new City();
         Product product = new Product();
-        List<Product> productList = new ArrayList<>();
 
 
 
@@ -21,12 +17,11 @@ public class Test {
         freight.addCityDestiny(city);
         freight.setContractCompany("DRT");
         product.addProduct("Celular", 0.5);
-        productList.add(product);
+        charge.addProduct(product, 300.0);
         product.addProduct("Geladeira", 60.0);
-        productList.add(product);
-        charge.addProduct((Product) productList, 70);
+        charge.addProduct(product, 70.0);
         freight.addCharge(charge);
-
+        System.out.println(freight.toString());
 
     }
 }
