@@ -2,7 +2,7 @@ package org.example.view;
 
 import org.example.model.Db;
 
-public class Menus {
+public class Menu {
     public static String actionMenu () {
         System.out.println("********************************************************");
         System.out.println("*      SISTEMA DE GESTÃO DE FRETES ERICSSON v 1.0      *");

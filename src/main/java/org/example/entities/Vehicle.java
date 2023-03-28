@@ -1,46 +1,80 @@
 package org.example.entities;
 
-import org.example.entities.enums.TruckSize;
-
 public class Vehicle {
 
-    public TruckSize size;
-    public int payloadCapacity;
+    public String name;
+    public Double payloadCapacity;
 
-    public Vehicle () {
+    public Double costPerKm;
+
+    public Vehicle() {
 
     }
 
-    public Vehicle(TruckSize size) {
-        this.size = size;
-    }
-
-    public Vehicle(TruckSize size, int payloadCapacity) {
-        this.size = size;
+    public Vehicle(String name, Double payloadCapacity, Double costPerKm) {
+        this.name = name;
         this.payloadCapacity = payloadCapacity;
+        this.costPerKm = costPerKm;
     }
 
-    public TruckSize getSize() {
-        return size;
+    public String getName() {
+        return name;
     }
 
-    public void setSize(TruckSize size) {
-        this.size = size;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getPayloadCapacity() {
+    public Double getPayloadCapacity() {
         return payloadCapacity;
     }
 
-    public void setPayloadCapacity(int payloadCapacity) {
+    public void setPayloadCapacity(Double payloadCapacity) {
         this.payloadCapacity = payloadCapacity;
+    }
+
+    public Double getCostPerKm() {
+        return costPerKm;
+    }
+
+    public void setCostPerKm(Double costPerKm) {
+        this.costPerKm = costPerKm;
     }
 
     @Override
     public String toString() {
         return "Vehicle{" +
-                "size=" + size +
+                "name='" + name + '\'' +
                 ", payloadCapacity=" + payloadCapacity +
+                ", costPerKm=" + costPerKm +
                 '}';
+    }
+
+    public enum TruckSize {
+        PEQUENO("Pequeno", 1000, 4.87),
+        MEDIO("Médio", 4000, 11.92),
+        GRANDE("Grande", 10000, 27.44);
+
+        private final String name;
+        private final double payloadCapacity;
+        private final double costPerKm;
+
+        TruckSize(String name, double payloadCapacity, double costPerKm) {
+            this.name = name;
+            this.payloadCapacity = payloadCapacity;
+            this.costPerKm = costPerKm;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public double getPayloadCapacity() {
+            return payloadCapacity;
+        }
+
+        public double getCostPerKm() {
+            return costPerKm;
+        }
     }
 }
