@@ -1,6 +1,7 @@
 package org.example.model;
 
 import org.example.entities.Vehicle;
+import org.example.services.FreightService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,5 +81,16 @@ public class Freight {
                 ", chargeList=" + chargeList +
                 ", vehicles=" + vehicles +
                 '}';
+    }
+
+    public List<Vehicle> addVehicle() {
+        FreightService freightService = null;
+        Double distance = freightService.calculateDistance(origin, destiny);
+        Double totalWeight = 0.0;
+        for (Charge c: chargeList) {
+            totalWeight += c.totalWeight;
+        }
+
+        return vehicles = freightService.chooseVehicles(totalWeight, distance);
     }
 }

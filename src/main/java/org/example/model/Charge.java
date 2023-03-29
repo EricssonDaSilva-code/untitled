@@ -44,6 +44,7 @@ public class Charge {
     }
 
     public void addProduct(Product product, Double quantity) {
+        this.quantity = quantity;
         productList.add(product);
         if (totalWeight == null) {
             totalWeight = product.getWeight() * quantity;

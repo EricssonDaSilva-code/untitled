@@ -95,7 +95,9 @@ public class Program {
                     //Guarda na variavel numberCity o número da coluna na linha 0 onde esta localizada o nome da cidade
                     System.out.print("-> ");
                     numberCity = sc.nextInt();
-                    freight.addCityOrigin(city.addCity(data[0][numberCity], numberCity));
+                    city = new City(data[0][numberCity], numberCity);
+                    freight.addCityOrigin(city);
+                    System.out.println(freight.toString());
 
                     System.out.printf("A cidade de origem é %s", data[0][numberCity]);
                     System.out.println();
@@ -104,7 +106,9 @@ public class Program {
                     //Guarda na variavel numberCityDestiny o número da coluna na linha 0 onde está localizado o nome da cidade de destino
                     System.out.print("-> ");
                     numberCityDestiny = sc.nextInt();
-                    freight.addCityDestiny(city.addCity(data[0][numberCityDestiny], numberCityDestiny));
+                    city = new City(data[0][numberCityDestiny], numberCityDestiny);
+                    freight.addCityDestiny(city);
+                    System.out.println(freight.toString());
                     System.out.printf("\nA cidade de destino é %s\n", data[0][numberCityDestiny]);
 
                     System.out.println();
@@ -126,6 +130,7 @@ public class Program {
                         System.out.println(charge.toString());
                     }
                     freight.addCharge(charge);
+                    freight.addVehicle();
                     System.out.println(freight.toString());
 
                     System.out.println(freight.toString());
